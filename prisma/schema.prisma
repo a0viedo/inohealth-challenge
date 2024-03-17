@@ -1,0 +1,34 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model PersonMetadata {
+  id                 Int      @id @default(autoincrement())
+  clientId           String   @map("client_id")
+  dateTesting        DateTime @map("date_testing") @db.Date
+  dateBirthdate      DateTime @map("date_birthdate") @db.Date
+  gender             Int
+  ethnicity          Int
+  creatine           Float
+  chloride           Float
+  fastingGlucose     Float    @map("fasting_glucose")
+  potassium          Float
+  sodium             Float
+  totalCalcium       Float    @map("total_calcium")
+  totalProtein       Float    @map("total_protein")
+  creatineUnit       String   @map("creatine_unit")
+  chlorideUnit       String   @map("chloride_unit")
+  fastingGlucoseUnit String   @map("fasting_glucose_unit")
+  potassiumUnit      String   @map("potassium_unit")
+  sodiumUnit         String   @map("sodium_unit")
+  totalCalciumUnit   String   @map("total_calcium_unit")
+  totalProteinUnit   String   @map("total_protein_unit")
+
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt DateTime @default(now()) @map("updated_at") @db.Timestamptz(6)
+}

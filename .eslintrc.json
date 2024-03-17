@@ -1,3 +1,25 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": "next/core-web-vitals",
+  "rules": {
+    "indent": [
+      "error",
+      2,
+      {
+        "offsetTernaryExpressions": true
+      }
+    ],
+    "object-shorthand": "error",
+    "eqeqeq": "error",
+    "prefer-template": "error",
+    "dot-notation": "error",
+    "no-console": "warn",
+    "import/no-unresolved": "off",
+    "quotes": [
+      "error",
+      "single",
+      {
+        "allowTemplateLiterals": true
+      }
+    ]
+  }
 }
