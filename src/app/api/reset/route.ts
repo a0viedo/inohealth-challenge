@@ -8,8 +8,18 @@ export async function POST(req: NextRequest) {
 
     await trpcClient.personMetadata.reset.query();
     return NextResponse.json({ ok: true }, { status: 200 });
-  } catch (error) {
-    logger.error({ error }, 'Failed to fetch from tRPC server:');
+  } catch (error: any) {
+    logger.error(
+      {
+        error: {
+          code: error.data.code,
+          status: error.data.httpStatus,
+          path: error.data.path,
+          message: error.shape.message,
+        },
+      },
+      'Failed to fetch from tRPC server:'
+    );
     return NextResponse.json(
       { error: 'Failed to fetch data' },
       {

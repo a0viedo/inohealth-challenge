@@ -4,7 +4,7 @@ import { applyWSSHandler } from '@trpc/server/adapters/ws';
 import { WebSocketServer } from 'ws';
 import { z } from 'zod';
 import { logger } from '../lib/logger';
-import { PrismaClient, Prisma, type PersonMetadata } from '@prisma/client';
+import { PrismaClient } from '@prisma/client';
 import {
   convertObjectKeysToCamelCase,
   convertPersonMetadataItem,
@@ -60,7 +60,8 @@ const appRouter = router({
         });
 
         logger.info(`Inserted rows in the database. Count: ${mapped.length}`);
-        return mapped;
+
+        return await prisma.personMetadata.findMany();
       }),
     reset: publicProcedure.query(async () => {
       await prisma.personMetadata.deleteMany();

@@ -10,6 +10,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
+import { toast } from 'sonner';
 import { formatDate } from '@/lib/utils';
 import type { PersonMetadataJSON } from '@/lib/types';
 
@@ -31,10 +32,11 @@ export default function Home() {
         throw new Error(`Network response was not ok: ${response.status}`);
       if (reset) {
         setData([]);
+        toast(`Cleared all the rows from the database.`);
       } else {
         const newData = await response.json();
         setData(currentData => [...currentData, ...newData]);
-        console.info(`Fetched ${newData.length} new rows.`);
+        toast(`Fetched ${newData.length} new rows.`);
       }
     } catch (error) {
       console.error('There was an error:', error);
