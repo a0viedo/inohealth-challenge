@@ -11,7 +11,7 @@
     "start": "next start",
     "start:backend": "node dist/src/server/index.js",
     "lint": "next lint",
-    "migrate-dev": "prisma migrate dev",
+    "migrate:dev": "prisma migrate dev",
     "migrate": "prisma migrate deploy"
   },
   "dependencies": {
