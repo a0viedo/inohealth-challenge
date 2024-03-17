@@ -36,6 +36,7 @@ const appRouter = router({
       .input(
         z.object({
           count: z.number().nullish(),
+          all: z.boolean().nullish(),
         })
       )
       .query(async ({ input }) => {
@@ -61,7 +62,11 @@ const appRouter = router({
 
         logger.info(`Inserted rows in the database. Count: ${mapped.length}`);
 
-        return await prisma.personMetadata.findMany();
+        if (input.all) {
+          return await prisma.personMetadata.findMany();
+        } else {
+          return mapped;
+        }
       }),
     reset: publicProcedure.query(async () => {
       await prisma.personMetadata.deleteMany();

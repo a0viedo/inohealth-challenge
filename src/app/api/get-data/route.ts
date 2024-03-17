@@ -12,6 +12,7 @@ export async function GET(req: NextRequest) {
 
     const data = await trpcClient.personMetadata.list.query({
       count: count ? parseInt(count, 10) : null,
+      all: req.nextUrl.searchParams.get('all') === 'true',
     });
     return NextResponse.json(data);
   } catch (error: any) {

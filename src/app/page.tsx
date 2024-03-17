@@ -18,19 +18,19 @@ export default function Home() {
   const [data, setData] = useState<PersonMetadataJSON[]>([]);
 
   useEffect(() => {
-    fetchDataAndSet('/api/get-data');
+    fetchDataAndSet('/api/get-data', 'GET', { all: true });
   }, []);
 
   async function fetchDataAndSet(
     url: string,
-    method: 'GET' | 'POST' = 'GET',
-    reset = false
+    method: 'GET' | 'POST',
+    options: { reset?: boolean; all?: boolean } = { reset: false, all: false }
   ) {
     try {
-      const response = await fetch(url, { method });
+      const response = await fetch(`${url}?all=${options.all}`, { method });
       if (!response.ok)
         throw new Error(`Network response was not ok: ${response.status}`);
-      if (reset) {
+      if (options.reset) {
         setData([]);
         toast(`Cleared all the rows from the database.`);
       } else {
@@ -48,13 +48,13 @@ export default function Home() {
       <div className="flex space-x-2">
         <Button
           variant="outline"
-          onClick={() => fetchDataAndSet('/api/reset', 'POST', true)}
+          onClick={() => fetchDataAndSet('/api/reset', 'POST', { reset: true })}
         >
           Reset
         </Button>
         <Button
           variant="outline"
-          onClick={() => fetchDataAndSet('/api/get-data')}
+          onClick={() => fetchDataAndSet('/api/get-data', 'GET')}
         >
           Add new data
         </Button>
