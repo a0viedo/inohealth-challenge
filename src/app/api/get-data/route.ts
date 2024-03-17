@@ -18,10 +18,10 @@ export async function GET(req: NextRequest) {
     logger.error(
       {
         error: {
-          code: error.data.code,
-          status: error.data.httpStatus,
-          path: error.data.path,
-          message: error.shape.message,
+          code: error.data?.code,
+          status: error.data?.httpStatus,
+          path: error.data?.path,
+          message: error.shape?.message,
         },
       },
       'Failed to fetch from tRPC server:'
