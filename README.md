@@ -5,7 +5,7 @@
 - Node.js >= 20
 - Docker
 
-Make a copy of the `.env.example` to a file `.env`. Run PostgreSQL as container:
+Make a copy of the `.env.example` to a file `.env.local`. Run PostgreSQL as container:
 
 ```
 docker run --name local-postgres -p 5432:5432 -e POSTGRES_PASSWORD=secret -d postgres
